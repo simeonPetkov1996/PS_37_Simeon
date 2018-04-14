@@ -1,0 +1,14 @@
+C:\Users\TheArrow\Desktop\PS\PS_37_Simeon\WPFhello\bin\Debug\WPFhello.exe.config
+C:\Users\TheArrow\Desktop\PS\PS_37_Simeon\WPFhello\bin\Debug\WPFhello.exe
+C:\Users\TheArrow\Desktop\PS\PS_37_Simeon\WPFhello\bin\Debug\WPFhello.pdb
+C:\Users\TheArrow\Desktop\PS\PS_37_Simeon\WPFhello\obj\Debug\MainWindow.g.cs
+C:\Users\TheArrow\Desktop\PS\PS_37_Simeon\WPFhello\obj\Debug\App.g.cs
+C:\Users\TheArrow\Desktop\PS\PS_37_Simeon\WPFhello\obj\Debug\WPFhello_MarkupCompile.cache
+C:\Users\TheArrow\Desktop\PS\PS_37_Simeon\WPFhello\obj\Debug\WPFhello_MarkupCompile.lref
+C:\Users\TheArrow\Desktop\PS\PS_37_Simeon\WPFhello\obj\Debug\MainWindow.baml
+C:\Users\TheArrow\Desktop\PS\PS_37_Simeon\WPFhello\obj\Debug\WPFhello.g.resources
+C:\Users\TheArrow\Desktop\PS\PS_37_Simeon\WPFhello\obj\Debug\WPFhello.Properties.Resources.resources
+C:\Users\TheArrow\Desktop\PS\PS_37_Simeon\WPFhello\obj\Debug\WPFhello.csproj.GenerateResource.Cache
+C:\Users\TheArrow\Desktop\PS\PS_37_Simeon\WPFhello\obj\Debug\WPFhello.csproj.CoreCompileInputs.cache
+C:\Users\TheArrow\Desktop\PS\PS_37_Simeon\WPFhello\obj\Debug\WPFhello.exe
+C:\Users\TheArrow\Desktop\PS\PS_37_Simeon\WPFhello\obj\Debug\WPFhello.pdb
