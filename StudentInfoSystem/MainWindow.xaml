@@ -5,5 +5,5 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudentInfoSystem"
         mc:Ignorable="d"
-        Title="StudentInfoSystem" Height="450" Width="550" Source="MainPage.xaml">
+        Title="StudentInfoSystem" Height="520" Width="550" Source="MainPage.xaml">
 </NavigationWindow>

@@ -37,7 +37,8 @@ namespace UserLogin
 
         public static void AssignUserRole(int id, UserRoles role)
         {
-            User user = UserData.TestUsers.ElementAt(id);
+            UserContext context = new UserContext();
+            User user = context.Users.ElementAt(id);
 
             user.role = (int)role;
             Logger.LogActivity(Activities.USER_ROLE_CHANGED);
@@ -47,6 +48,7 @@ namespace UserLogin
             Console.WriteLine((UserRoles)user.role);
             Console.WriteLine(user.created);
             Console.WriteLine(user.activeTo);
+            context.SaveChanges();
             return;
 
         }
@@ -54,7 +56,8 @@ namespace UserLogin
 
         public static void SetUserActiveTo(int id, DateTime expirationDate)
         {
-            User user = UserData.TestUsers.ElementAt(id);
+            UserContext context = new UserContext();
+            User user = context.Users.ElementAt(id);
 
             user.activeTo = expirationDate;
             Logger.LogActivity(Activities.USER_ACTIVE_TO_CHANGED);
@@ -71,10 +74,12 @@ namespace UserLogin
 
         static public Dictionary<string, int> AllUsersUsernames()
         {
+            UserContext context = new UserContext();
             Dictionary<string, int> result = new Dictionary<string, int>();
-            for (int i = 0; i < TestUsers.Count; i++)
+            IEnumerable<User> Users = context.Users;
+            for (int i = 0; i < Users.Count(); i++)
             {
-                result.Add(TestUsers[i].username, i);
+                result.Add(Users.ElementAt(i).username, i);
             }
             return result;
         }

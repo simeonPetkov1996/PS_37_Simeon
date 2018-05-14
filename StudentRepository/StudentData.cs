@@ -43,7 +43,8 @@ namespace StudentRepository
 
         public static Student GetStudent(String fNumber)
         {
-            List<Student> studentAsList = (from student in DefaultStudents
+            StudentContext context = new StudentContext();
+            List<Student> studentAsList = (from student in context.Students
                                            where student.fNumber.Equals(fNumber)
                                            select student).ToList();
             return studentAsList.Count == 0 ? null : studentAsList.First();

@@ -14,22 +14,93 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UserLogin;
+using System.Data;
+using System.Data.SqlClient;
+using System.ComponentModel;
 
 namespace StudentInfoSystem
 {
     
     public partial class MainPage : Page
     {
+
         private static User anonymousUser = new User(null, null, null, 0, new DateTime(), new DateTime());
         private User user = anonymousUser;
 
+        public List<Student> Students
+        {
+            get
+            {
+                return StudentData.DefaultStudents;
+            }
+        }
+
+        public List<string> StudStatusChoices { get; set; }
+
+
         public MainPage()
         {
+            
             InitializeComponent();
             DisableTextBoxes();
             loginTB.IsEnabled = true;
             studentButton.Visibility = Visibility.Hidden;
             createStudentButton.Visibility = Visibility.Hidden;
+            FillStudStatusChoices();
+            this.DataContext = this;
+            StudentInfoContext context = new StudentInfoContext();
+            if (IsStudentsTableEmtpy(context))
+            {
+                SaveStudentsInTable(context);
+            }
+            if (IsUserTableEmtpy(context))
+            {
+                SaveUsersInTable(context);
+            }
+        }
+
+        private Boolean IsStudentsTableEmtpy(StudentInfoContext context)
+        {
+            IEnumerable<Student> queryStudents = context.Students;
+            if (queryStudents.Count() == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void SaveStudentsInTable(StudentInfoContext context)
+        {
+            foreach (Student st in StudentData.DefaultStudents)
+            {
+                context.Students.Add(st);
+            }
+            context.SaveChanges();
+        }
+
+        private Boolean IsUserTableEmtpy(StudentInfoContext context)
+        {
+            IEnumerable<User> queryUsers = context.Users;
+            if (queryUsers.Count() == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void SaveUsersInTable(StudentInfoContext context)
+        {
+            foreach (User user in UserData.TestUsers)
+            {
+                context.Users.Add(user);
+            }
+            context.SaveChanges();
         }
 
         private void ClearTextBoxes()
@@ -45,17 +116,12 @@ namespace StudentInfoSystem
 
         private void SetStudentData(Student student)
         {
-            firtNameTB.Text = student.firstName;
-            middleNameTB.Text = student.secondName;
-            thirdNameTB.Text = student.lastName;
-            facultyTB.Text = student.faculty;
-            specialtyTB.Text = student.specialty;
-            oksTB.Text = student.lastCertification.ToString();
-            stateTB.Text = student.statusType.ToString();
-            facNumberTB.Text = student.fNumber;
-            courseTB.Text = student.course.ToString();
-            flowTB.Text = student.flow.ToString();
-            groupTB.Text = student.group.ToString();
+            this.DataContext = student;
+            ListBoxItem item = new ListBoxItem();
+            item.Content = student.faculty;
+
+            facultyLB.SelectedItem = facultyLB.Items[0];
+            facultyLB.ScrollIntoView(facultyLB.Items[0]);
         }
 
         private void DisableTextBoxes()
@@ -86,11 +152,13 @@ namespace StudentInfoSystem
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {
+            StudentInfoContext context = new StudentInfoContext();
+            IEnumerable<User> Users = context.Users;
             if (loginButton.Content.Equals("Провери"))
             {
                 if (UserData.AllUsersUsernames().ContainsKey(loginTB.Text))
                 {
-                    user = UserData.TestUsers[UserData.AllUsersUsernames()[loginTB.Text]];
+                    user = Users.ElementAt(UserData.AllUsersUsernames()[loginTB.Text]);
                     infoLabel.Content = "Потребител " + user.username;
                     loginLable.Content = "Парола:";
                     loginTB.Clear();
@@ -112,6 +180,8 @@ namespace StudentInfoSystem
                     loginTB.IsEnabled = false;
                     loginButton.Content = "Излез";
                     loadFunctionalitiesAccordingRole();
+                    //context.Logger.Add(new Logs("User " + user.username + " logged"));
+                    //context.SaveChanges();
                 }
                 else
                 {
@@ -133,6 +203,7 @@ namespace StudentInfoSystem
                 loginTB.IsEnabled = true;
                 studentButton.Visibility = Visibility.Hidden;
                 createStudentButton.Visibility = Visibility.Hidden;
+                
             }
         }
 
@@ -170,6 +241,31 @@ namespace StudentInfoSystem
         private void createStudentButton_Click(object sender, RoutedEventArgs e)
         {
             //TODO
+        }
+
+        private void FillStudStatusChoices()
+        {
+            StudStatusChoices = new List<string>();
+            using (IDbConnection connection = new
+            SqlConnection(Properties.Settings.Default.DbConnect))
+            {
+                string sqlquery =
+                    @"SELECT StatusDescr FROM StudStatus";
+                IDbCommand command = new SqlCommand();
+                command.Connection = connection;
+                connection.Open();
+                command.CommandText = sqlquery;
+                IDataReader reader = command.ExecuteReader();
+                bool notEndOfResult;
+                notEndOfResult = reader.Read();
+                while (notEndOfResult)
+
+                {
+                    string s = reader.GetString(0);
+                    StudStatusChoices.Add(s);
+                    notEndOfResult = reader.Read();
+                }
+            }
         }
 
     }

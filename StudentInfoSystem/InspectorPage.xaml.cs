@@ -1,6 +1,7 @@
 ﻿using StudentRepository;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,12 +22,17 @@ namespace StudentInfoSystem
     /// </summary>
     public partial class InspectorPage : Page
     {
+        public List<Student> Students { get; set; }
+
         public InspectorPage()
         {
+            
             InitializeComponent();
+            Students = StudentData.DefaultStudents;
+            dg.ItemsSource = Students;
+            dg.Items.Refresh();
             foreach (Student student in StudentData.DefaultStudents)
             {
-                
                 if (!Contains(student))
                 {
                     ListBoxItem listBoxItem = new ListBoxItem();
@@ -50,16 +56,22 @@ namespace StudentInfoSystem
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            studentsLB.Items.Clear();
+            Students.Clear();
             foreach(Student student in StudentData.DefaultStudents)
             {
                 if (student.group.ToString().Equals((groupsLB.SelectedItem as ListBoxItem).Content.ToString()))
                 {
-                    ListBoxItem listBoxItem = new ListBoxItem();
-                    listBoxItem.Content = student.firstName + " " + student.secondName + " " + student.lastName;
-                    studentsLB.Items.Add(listBoxItem);
+                    Students.Add(student);
                 }
             }
+            dg.Items.Refresh();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Students = StudentData.DefaultStudents;
+            dg.ItemsSource = Students;
+            dg.Items.Refresh();
         }
     }
 }

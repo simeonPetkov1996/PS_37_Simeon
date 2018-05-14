@@ -15,6 +15,9 @@ namespace UserLogin
         {
             LogTemplate logTemplate = new LogTemplate(activity, LoginValidation.currentUserUsername, LoginValidation.UserRole);
             currentSessionActivities.Add(logTemplate);
+            UserContext context = new UserContext();
+            context.Logger.Add(new Logs(logTemplate.ToString()));
+            context.SaveChanges();
             if (File.Exists("test.txt"))
             {
                 File.AppendAllText("test.txt", logTemplate.ToString() + "\n");

@@ -8,6 +8,7 @@ namespace UserLogin
 {
     public class User
     {
+        public int userId { get; set; }
         public String username { get; set; }
         public String password { get; set; }
         public String number { get; set; }
@@ -23,6 +24,11 @@ namespace UserLogin
             this.role = role;
             this.created = created;
             this.activeTo = activeTo;
+        }
+
+        public User()
+        {
+
         }
     }
 }

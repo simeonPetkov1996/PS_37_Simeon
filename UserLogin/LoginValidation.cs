@@ -81,7 +81,8 @@ namespace UserLogin
 
         private User IsUserPassCorrect(String username, String password)
         {
-            List<User> users = (from user in UserData.TestUsers
+            UserContext context = new UserContext();
+            List<User> users = (from user in context.Users
                                 where user.username.Equals(username) && user.password.Equals(password)
                                 select user).ToList();
             return users.Count == 0 ? null : users.First();

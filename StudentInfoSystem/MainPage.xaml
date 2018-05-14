@@ -28,13 +28,50 @@
                 <Label x:Name="firtNameLabel" Content="Име:" HorizontalAlignment="Left" Margin="22,10,0,-43" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
                 <Label x:Name="middleNameLabel"  Content="Презиме:" HorizontalAlignment="Left" Margin="22,36,0,-69" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
                 <Label x:Name="thirdNameLabel" Content="Фамиля:" HorizontalAlignment="Left" Margin="22,62,0,-95" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                <TextBox x:Name="firtNameTB" HorizontalAlignment="Left" Height="23" Margin="92,10,0,-64" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.05,1.174" Grid.Column="1"/>
-                <TextBox x:Name="middleNameTB"  HorizontalAlignment="Left" Height="23" Margin="92,36,0,-92" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
-                <TextBox x:Name="thirdNameTB"  HorizontalAlignment="Left" Height="23" Margin="92,62,0,-118" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+                <TextBox x:Name="firtNameTB" HorizontalAlignment="Left" Height="23" Margin="92,10,0,-64" TextWrapping="Wrap" Text="{Binding firstName}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.05,1.174" Grid.Column="1"/>
+                <TextBox x:Name="middleNameTB"  HorizontalAlignment="Left" Height="23" Margin="92,36,0,-92" TextWrapping="Wrap" Text="{Binding secondName}" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+                <TextBox x:Name="thirdNameTB"  HorizontalAlignment="Left" Height="23" Margin="92,62,0,-118" TextWrapping="Wrap" Text="{Binding lastName}" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="studentDataGB" Grid.Row="1" Header="Студентска информация" HorizontalAlignment="Left" Height="160" VerticalAlignment="Top" Width="522">
+        <GroupBox x:Name="studentDataGB" Grid.Row="1" Header="Студентска информация" HorizontalAlignment="Left" Height="250" VerticalAlignment="Top" Width="522">
             <Grid>
+                <Grid.Resources>
+                    <XmlDataProvider x:Key="FacultiesDS" XPath="Faculties">
+                        <x:XData>
+                            <Faculties xmlns="">
+                                <Faculty Name="FKST">
+                                </Faculty>
+                                <Faculty Name="MF">
+                                </Faculty>
+                                <Faculty Name="Test">
+                                </Faculty>
+                            </Faculties>
+                        </x:XData>
+                    </XmlDataProvider>
+                    <XmlDataProvider x:Key="OksDS" XPath="Okss">
+                        <x:XData>
+                            <Okss xmlns="">
+                                <Oks Name="bachelor">
+                                </Oks>
+                                <Oks Name="magister">
+                                </Oks>
+                                <Oks Name="doctor">
+                                </Oks>
+                            </Okss>
+                        </x:XData>
+                    </XmlDataProvider>
+                    <XmlDataProvider x:Key="SpecialtiesDS" XPath="Specialties">
+                        <x:XData>
+                            <Specialties xmlns="">
+                                <Specialty Name="KSI">
+                                </Specialty>
+                                <Specialty Name="IT">
+                                </Specialty>
+                            </Specialties>
+                        </x:XData>
+                    </XmlDataProvider>
+                </Grid.Resources>
+                
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="11*"/>
                     <ColumnDefinition Width="18*"/>
@@ -43,22 +80,47 @@
                 <Button x:Name="studentButton" Content="Зареди студент" HorizontalAlignment="Left" Margin="219,349,0,-181" VerticalAlignment="Top" Width="98" Click="studentButton_Click" Grid.Column="2"/>
                 <Button x:Name="createStudentButton" Content="Въвеждане на студент" HorizontalAlignment="Left" Margin="327,350,-9,-182" VerticalAlignment="Top" Width="134" Click="createStudentButton_Click" Grid.Column="2"/>
                 <Label x:Name="facultyLabel" Content="Факултет:" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.079,0.615" Grid.Column="1" Grid.ColumnSpan="2"/>
-                <Label x:Name="specialtyLabel" Content="Специалност:" HorizontalAlignment="Left" Margin="0,36,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="2"/>
-                <Label x:Name="oksLabel" Content="ОКС:" HorizontalAlignment="Left" Margin="0,62,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                <Label x:Name="stateLabel" Content="Статус:" HorizontalAlignment="Left" Margin="0,88,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="2"/>
-                <Label x:Name="facNumberLabel" Content="Факултетен Номер:" HorizontalAlignment="Left" Margin="0,114,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <Label x:Name="specialtyLabel" Content="Специалност:" HorizontalAlignment="Left" Margin="0,49,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <Label x:Name="oksLabel" Content="ОКС:" HorizontalAlignment="Left" Margin="0,88,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                
+                
 
-                <TextBox x:Name="facultyTB"  HorizontalAlignment="Left" Height="23" Margin="82,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
-                <TextBox x:Name="specialtyTB"  HorizontalAlignment="Left" Height="23" Margin="82,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
-                <TextBox x:Name="oksTB"  HorizontalAlignment="Left" Height="23" Margin="82,62,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
-                <TextBox x:Name="stateTB"  HorizontalAlignment="Left" Height="23" Margin="82,88,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
-                <TextBox x:Name="facNumberTB" HorizontalAlignment="Left" Height="23" Margin="82,114,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
-                <Label x:Name="courseLabel" Content="Курс" HorizontalAlignment="Left" Margin="282,10,0,0" VerticalAlignment="Top" Grid.Column="2"/>
-                <Label x:Name="flowLabel" Content="Поток:" HorizontalAlignment="Left" Margin="282,36,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.184,-0.808" Grid.Column="2"/>
-                <Label x:Name="groupLabel" Content="Група:" HorizontalAlignment="Left" Margin="282,62,0,0" VerticalAlignment="Top" Grid.Column="2"/>
-                <TextBox x:Name="courseTB" HorizontalAlignment="Left" Height="23" Margin="327,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
-                <TextBox x:Name="flowTB" HorizontalAlignment="Left" Height="23" Margin="327,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
-                <TextBox x:Name="groupTB" HorizontalAlignment="Left" Height="23" Margin="327,62,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+                <ListBox x:Name="facultyLB"  HorizontalAlignment="Left" Height="36" Margin="82,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" ItemsSource="{Binding Source={StaticResource FacultiesDS}, XPath=Faculty}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding XPath=@Name}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+
+                <ListBox x:Name="specialtyLB"  HorizontalAlignment="Left" Height="36" Margin="82,49,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" ItemsSource="{Binding Source={StaticResource SpecialtiesDS}, XPath=Specialty}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding XPath=@Name}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <ListBox x:Name="oksLB"  HorizontalAlignment="Left" Height="36" Margin="82,88,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" ItemsSource="{Binding Source={StaticResource OksDS}, XPath=Oks}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding XPath=@Name}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                
+                <Label x:Name="courseLabel" Content="Курс:" HorizontalAlignment="Left" Margin="270,10,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                <Label x:Name="flowLabel" Content="Поток:" HorizontalAlignment="Left" Margin="270,36,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.184,-0.808" Grid.Column="2"/>
+                <Label x:Name="groupLabel" Content="Група:" HorizontalAlignment="Left" Margin="270,62,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                <Label x:Name="facNumberLabel" Content="Ф Номер:" HorizontalAlignment="Left" Margin="270,88,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                <Label x:Name="stateLabel" Content="Статус:" HorizontalAlignment="Left" Margin="0,127,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                <TextBox x:Name="courseTB" HorizontalAlignment="Left" Height="23" Margin="327,10,0,0" TextWrapping="Wrap" Text="{Binding course}" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+                <TextBox x:Name="flowTB" HorizontalAlignment="Left" Height="23" Margin="327,36,0,0" TextWrapping="Wrap" Text="{Binding flow}" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+                <TextBox x:Name="groupTB" HorizontalAlignment="Left" Height="23" Margin="327,62,0,0" TextWrapping="Wrap" Text="{Binding group}" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+                <TextBox x:Name="facNumberTB" HorizontalAlignment="Left" Height="23" Margin="327,88,0,0" TextWrapping="Wrap" Text="{Binding fNumber}" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+                <ListBox x:Name="stateLB"  HorizontalAlignment="Left" Height="92" Margin="82,127,0,0" ItemsSource="{Binding StudStatusChoices}" VerticalAlignment="Top" Width="240" Grid.Column="21"/>
+
             </Grid>
         </GroupBox>
 

@@ -8,6 +8,7 @@ namespace StudentRepository
 {
     public class Student
     {
+        public int studentId { get; set; }
         public string firstName { get; set; }
         public string secondName { get; set; }
         public string lastName { get; set; }
@@ -35,6 +36,10 @@ namespace StudentRepository
             this.course = course;
             this.flow = flow;
             this.group = group;
+        }
+        public Student()
+        {
+
         }
 
     }
