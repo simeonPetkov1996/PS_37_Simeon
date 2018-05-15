@@ -61,7 +61,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GradesPAge.xaml.cs">
+      <DependentUpon>GradesPAge.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StudentInfoContext.cs" />
+    <Page Include="GradesPAge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InspectorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -21,8 +21,9 @@ namespace StudentRepository
         public int course { get; set; }
         public int flow { get; set; }
         public int group { get; set; }
+        public List<Grade> grades { get; set; }
 
-        public Student(string firstName, string secondName, string lastName, string fNumber, string faculty, string specialty, DegreeType degreeType, StatusType statusType, DateTime lastCertification, int course, int flow, int group)
+        public Student(string firstName, string secondName, string lastName, string fNumber, string faculty, string specialty, DegreeType degreeType, StatusType statusType, DateTime lastCertification, int course, int flow, int group, List<Grade> grades)
         {
             this.firstName = firstName;
             this.secondName = secondName;
@@ -36,6 +37,7 @@ namespace StudentRepository
             this.course = course;
             this.flow = flow;
             this.group = group;
+            this.grades = grades;
         }
         public Student()
         {

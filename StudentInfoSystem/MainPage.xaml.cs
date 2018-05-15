@@ -17,6 +17,7 @@ using UserLogin;
 using System.Data;
 using System.Data.SqlClient;
 using System.ComponentModel;
+using System.Data.Entity;
 
 namespace StudentInfoSystem
 {
@@ -42,13 +43,18 @@ namespace StudentInfoSystem
         {
             
             InitializeComponent();
+
+            Database.SetInitializer<StudentInfoContext>(new DropCreateDatabaseIfModelChanges<StudentInfoContext>());
+
             DisableTextBoxes();
             loginTB.IsEnabled = true;
             studentButton.Visibility = Visibility.Hidden;
             createStudentButton.Visibility = Visibility.Hidden;
-            FillStudStatusChoices();
+            //FillStudStatusChoices();
             this.DataContext = this;
             StudentInfoContext context = new StudentInfoContext();
+            IsGradesTableEmtpy(context);
+            IsLogsTableEmtpy(context);
             if (IsStudentsTableEmtpy(context))
             {
                 SaveStudentsInTable(context);
@@ -63,6 +69,32 @@ namespace StudentInfoSystem
         {
             IEnumerable<Student> queryStudents = context.Students;
             if (queryStudents.Count() == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private Boolean IsGradesTableEmtpy(StudentInfoContext context)
+        {
+            IEnumerable<Grade> quertGrades = context.Grades;
+            if (quertGrades.Count() == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private Boolean IsLogsTableEmtpy(StudentInfoContext context)
+        {
+            IEnumerable<Logs> queryLogs = context.Logs;
+            if (queryLogs.Count() == 0)
             {
                 return true;
             }
@@ -209,12 +241,20 @@ namespace StudentInfoSystem
 
         private void loadFunctionalitiesAccordingRole()
         {
-            if (user.role == 2)
+            if (user.role == 3)
             {
                 facNumberTB.IsEnabled = true;
                 studentButton.Visibility = Visibility.Visible;
                 this.NavigationService.Navigate(new InspectorPage());
                 
+
+            }
+            if (user.role == 2)
+            {
+                facNumberTB.IsEnabled = true;
+                studentButton.Visibility = Visibility.Visible;
+                this.NavigationService.Navigate(new GradesPAge());
+
 
             }
             else if (user.role == 4)

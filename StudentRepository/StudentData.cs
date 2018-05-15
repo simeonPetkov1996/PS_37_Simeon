@@ -29,10 +29,10 @@ namespace StudentRepository
         private static void ResetTestStudentData()
         {
             _defaultStudents = new List<Student>();
-            _defaultStudents.Add(new Student("Simeon", "Plamenov", "Petkov", "121215078", "FKST", "KSI", DegreeType.BACHELOR, StatusType.CERTIFIED, Convert.ToDateTime("01.02.2018 г. 14:12:24"), 3, 9, 37));
-            _defaultStudents.Add(new Student("Dimo", "Hristov", "Georgiev", "121215074", "FKST", "KSI", DegreeType.BACHELOR, StatusType.CERTIFIED, Convert.ToDateTime("01.02.2018 г. 14:12:24"), 3, 9, 37));
-            _defaultStudents.Add(new Student("Pesho", "Petrov", "Petrov", "121215079", "FKST", "KSI", DegreeType.BACHELOR, StatusType.CERTIFIED, Convert.ToDateTime("01.02.2018 г. 14:12:24"), 3, 9, 38));
-            _defaultStudents.Add(new Student("Sasho", "Aleksandrov", "Aleksandrov", "121215080", "FKST", "KSI", DegreeType.BACHELOR, StatusType.CERTIFIED, Convert.ToDateTime("01.02.2018 г. 14:12:24"), 3, 9, 39));
+            _defaultStudents.Add(new Student("Simeon", "Plamenov", "Petkov", "121215078", "FKST", "KSI", DegreeType.BACHELOR, StatusType.CERTIFIED, Convert.ToDateTime("01.02.2018 г. 14:12:24"), 3, 9, 37, new List<Grade>()));
+            _defaultStudents.Add(new Student("Dimo", "Hristov", "Georgiev", "121215074", "FKST", "KSI", DegreeType.BACHELOR, StatusType.CERTIFIED, Convert.ToDateTime("01.02.2018 г. 14:12:24"), 3, 9, 37, new List<Grade>()));
+            _defaultStudents.Add(new Student("Pesho", "Petrov", "Petrov", "121215079", "FKST", "KSI", DegreeType.BACHELOR, StatusType.CERTIFIED, Convert.ToDateTime("01.02.2018 г. 14:12:24"), 3, 9, 38, new List<Grade>()));
+            _defaultStudents.Add(new Student("Sasho", "Aleksandrov", "Aleksandrov", "121215080", "FKST", "KSI", DegreeType.BACHELOR, StatusType.CERTIFIED, Convert.ToDateTime("01.02.2018 г. 14:12:24"), 3, 9, 39, new List<Grade>()));
         }
 
         public static String PrepareCertificate(String fNumber)
